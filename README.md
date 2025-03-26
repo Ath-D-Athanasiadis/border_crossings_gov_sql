@@ -1,5 +1,3 @@
-# border_crossings_gov_sql
-
 -- Step 1: Create Table
 CREATE TABLE border_crossings (
     port_name VARCHAR(255),
