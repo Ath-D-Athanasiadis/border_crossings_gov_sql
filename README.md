@@ -1,4 +1,5 @@
 -- Step 1: Create Table
+
 CREATE TABLE border_crossings (
     port_name VARCHAR(255),
     state VARCHAR(255),
@@ -13,6 +14,7 @@ CREATE TABLE border_crossings (
 );
 
 -- Step 2: Remove Duplicates (if applicable)
+
 DELETE FROM border_crossings
 WHERE ctid NOT IN (
     SELECT MIN(ctid)
@@ -21,14 +23,17 @@ WHERE ctid NOT IN (
 );
 
 -- Step 3: Handle Missing Values (example: replace nulls in 'value' with 0)
+
 UPDATE border_crossings
 SET value = COALESCE(value, 0);
 
 -- Step 4: Sort Data by 'Value' in Descending Order
+
 SELECT * FROM border_crossings
 ORDER BY value DESC;
 
 -- Step 5: Load Cleaned Data into Table
+
 COPY border_crossings (port_name, state, port_code, border, date, measure, value, latitude, longitude, point)
 FROM '/path/to/cleaned_border_data.csv'
 DELIMITER ','
